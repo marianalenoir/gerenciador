@@ -1,34 +1,7 @@
-
 laboratório = {
-    '001': {
-        'hostname': 'lab01-pc1',
-        'config': ('Intel i5', '32 GB', '1 TB'),
-        'status': {'usuario_logado': 'Gabriel', 'sistema_operacional': 'Windows 11', 'ligado': True}
-    },
-
-    '002': {
-        'hostname': 'lab01-pc2',
-        'config': ('AMD Ryzen 5', '16 GB', '512 GB SSD'),
-        'status': {'usuario_logado': 'Ana', 'sistema_operacional': 'Ubuntu', 'ligado': False}
-    },
-
-    '003': {
-        'hostname': 'lab01-pc3',
-        'config': ('Snapdragon 8', '4 GB', '256 GB SSD'),
-        'status': {'usuario_logado': 'Amanda', 'sistema_operacional': 'Ubuntu', 'ligado': False}
-    },
-
-    '004': {
-        'hostname': 'lab01-pc4',
-        'config': ('M2', '32 GB', '1 TB SSD'),
-        'status': {'usuario_logado': 'Lucas Beija Mordendo', 'sistema_operacional': 'macOS', 'ligado': True}
-    },
-
-    '005': {
-        'hostname': 'lab01-pc5',
-        'config': ('Intel i7', '16 GB', '512 TB SSD'),
-        'status': {'usuario_logado': 'Lucas Beija Mordendo', 'sistema_operacional': 'Windows 11', 'ligado': True}
-    },
+    id = {
+        hostname = 
+        configuracao = ()
 }
 
 lista_manutencao = []
@@ -50,25 +23,28 @@ def gerenciar_manutencao():
     4. Mostrar o primeiro computador da lista
     5. Mostrar o último computador da lista
     6. Mostrar o computador em um índice específico
-    7. Remover um computador da lista''')
-    gerenciar_manutencao = input("Escolha uma opção: ")
+    7. Remover um computador da lista
+    8. Retornar ao menu principal''')
+    return input("Escolha uma opção: ")
+
+
 
 # Loop principal do menu
 while True:
     opcao = exibir_menu()
     if opcao == "1":
-        cadastrar_computador()
+        cadastrar_computador()      
     if opcao == "2":
         listar_computadores()
     if opcao == "3":
         informacoes_computador()
     if opcao == "4":
-        gerenciar_manutencao()
-        if gerenciar_manutencao == "1":
+        op2 = gerenciar_manutencao()
+        if op2 == "1":
             lista_manutencao = []
             print("Lista de manutenção criada/limpa.")
 
-        elif gerenciar_manutencao == "2":
+        elif op2 == "2":
             id_pc = input('Digite o id do computador que deseja adicionar: ')
             if id_pc in laboratório:
                 if len(lista_manutencao) < 6:
@@ -79,24 +55,24 @@ while True:
             else:
                 print("Computador não encontrado no laboratório.")
 
-        elif gerenciar_manutencao == "3":
+        elif op2 == "3":
             if lista_manutencao:
                     for pc in lista_manutencao:
                         print(f"{pc['hostname']} - {pc['config']}")
             else:
                 print("A lista de manutenção está vazia.")
                 
-        elif gerenciar_manutencao == "4":
+        elif op2 == "4":
             if lista_manutencao:
                 primeiro_pc = lista_manutencao[0]
                 print(f"Primeiro computador na lista: {primeiro_pc['hostname']} - {primeiro_pc['config']}")
 
-        elif gerenciar_manutencao == "5":
+        elif op2 == "5":
             if lista_manutencao:
                 ultimo_pc = lista_manutencao[-1]
                 print(f"Último computador na lista: {ultimo_pc['hostname']} - {ultimo_pc['config']}")
                 
-        elif gerenciar_manutencao == "6":
+        elif op2 == "6":
             indice = int(input("Digite o índice do computador que deseja ver (0 a 5): "))
             if 0 <= indice < len(lista_manutencao):
                 pc_especifico = lista_manutencao[indice]
@@ -104,7 +80,7 @@ while True:
             else:
                 print("Índice inválido ou fora do alcance da lista.")
                 
-        elif gerenciar_manutencao == "7":
+        elif op2 == "7":
             id_pc = input('Digite o id do computador que deseja remover: ')
             pc_para_remover = next((pc for pc in lista_manutencao if pc['hostname'].endswith(id_pc)), None)
             if pc_para_remover:
@@ -112,6 +88,8 @@ while True:
                 print(f"Computador {id_pc} removido da lista de manutenção.")
             else:
                 print("Computador não encontrado na lista de manutenção.")
-
+    
+        elif op2 == '8':
+            opcao = exibir_menu()
     if opcao == "5":
         print("Saindo do programa...")
